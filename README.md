@@ -1,1 +1,1 @@
-# Innowise-Lab-Internship-Level-2-Mini-paint
+# webpack-react-typesript-redux
