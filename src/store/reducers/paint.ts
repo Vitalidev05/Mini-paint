@@ -1,16 +1,16 @@
-import { TestActionType } from '../../const';
+import { PaintActionType } from '../../const';
 import { TEST } from '../actions/actionTypes';
 
 const initialState = {
-  test: 'test1',
+  test: 'asdasd',
 };
 
-const paint = (state = initialState, action: TestActionType) => {
+const paint = (state = initialState, action: PaintActionType) => {
   switch (action.type) {
     case TEST: {
       return {
         ...state,
-        test: 'test2',
+        test: 'cringe',
       };
     }
     default:
