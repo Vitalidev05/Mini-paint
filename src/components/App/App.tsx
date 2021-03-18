@@ -1,7 +1,14 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
-import Paint from '../Paint';
+import AppRouter from '../AppRouter';
+import NavBar from '../NavBar';
 
-const App = (): JSX.Element => <Paint />;
+const App = (): JSX.Element => (
+  <BrowserRouter>
+    <NavBar />
+    <AppRouter />
+  </BrowserRouter>
+);
 
 export default App;

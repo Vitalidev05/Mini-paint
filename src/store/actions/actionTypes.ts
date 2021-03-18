@@ -8,6 +8,9 @@ const PUSH_TO_UNDO = 'PUSH_TO_UNDO';
 const PUSH_TO_REDO = 'PUSH_TO_REDO';
 const UNDO = 'UNDO';
 const REDO = 'REDO';
+const DELETE_STATE = 'DELETE_STATE';
+const DRAW = 'DRAW';
+const ADD_PAINT = 'ADD_PAINT';
 
 export {
   TEST,
@@ -20,4 +23,7 @@ export {
   PUSH_TO_REDO,
   UNDO,
   REDO,
+  DELETE_STATE,
+  DRAW,
+  ADD_PAINT,
 };

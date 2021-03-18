@@ -9,6 +9,8 @@ import {
   PUSH_TO_UNDO,
   REDO,
   UNDO,
+  DRAW,
+  ADD_PAINT,
 } from '../store/actions/actionTypes';
 import Brush from '../tools/Brush';
 import Circle from '../tools/Circle';
@@ -24,14 +26,41 @@ interface IToolState {
   tool?: ToolType;
 }
 
+interface IAppState {
+  privatePaints: IPaint[];
+  author: string;
+}
+
+interface IPaint {
+  name: string;
+  id: string;
+  canvas: IPrivateCanvas;
+}
+
+interface IPrivateCanvas {
+  canvasRef: HTMLCanvasElement | null;
+  dataUrl: string;
+}
+
 interface ICanvasState {
   canvasRef: HTMLCanvasElement | null;
   undoList: string[];
   redoList: string[];
+  dataUrl: string;
 }
 
 type PaintActionType = {
   type: typeof TEST;
+};
+
+interface IAddPaint {
+  name: string;
+  id: string;
+}
+
+type PrivatePaintsType = {
+  type: typeof ADD_PAINT;
+  payload: IAddPaint;
 };
 
 type CanvasActionType =
@@ -52,6 +81,9 @@ type CanvasActionType =
   }
   | {
     type: typeof UNDO;
+  }
+  | {
+    type: typeof DRAW;
   };
 
 type ToolActionType =
@@ -80,4 +112,7 @@ export {
   IToolState,
   ColorType,
   ICanvasState,
+  IAppState,
+  PrivatePaintsType,
+  IAddPaint,
 };

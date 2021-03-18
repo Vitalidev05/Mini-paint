@@ -23,7 +23,7 @@ import InputWidth from './InputWidth';
 import style from './Toolbar.scss';
 
 export const Toolbar = () => {
-  const { setTool, setFillColor, setStrokeColor, undo, redo } = useActions();
+  const { setTool, setFillColor, setStrokeColor, undo, redo, draw } = useActions();
   const { canvasRef } = useStates(store => store.canvasState);
 
   function setBrush() {
@@ -94,7 +94,7 @@ export const Toolbar = () => {
           <Button variant="contained" onClick={redo}>
             <Redo />
           </Button>
-          <Button variant="contained">
+          <Button variant="contained" onClick={draw}>
             <Save />
           </Button>
         </ButtonGroup>

@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux';
 
 import canvasState from './canvasState';
-import paint from './paint';
+import privatePaints from './privatePaints';
 import toolState from './toolState';
 
 const rootReducer = combineReducers({
-  paint,
   canvasState,
   toolState,
+  privatePaints,
 });
 
 type RootState = ReturnType<typeof rootReducer>;

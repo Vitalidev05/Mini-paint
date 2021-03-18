@@ -1,10 +1,11 @@
 import { CanvasActionType, ICanvasState } from '../../const';
-import { SET_REF, PUSH_TO_REDO, PUSH_TO_UNDO, REDO, UNDO } from '../actions/actionTypes';
+import { SET_REF, PUSH_TO_REDO, PUSH_TO_UNDO, REDO, UNDO, DRAW } from '../actions/actionTypes';
 
 const initialState = {
   canvasRef: null,
   undoList: [],
   redoList: [],
+  dataUrl: '',
 };
 
 const canvasState = (state: ICanvasState = initialState, action: CanvasActionType) => {
@@ -27,6 +28,29 @@ const canvasState = (state: ICanvasState = initialState, action: CanvasActionTyp
       return {
         ...state,
         undoList: [...state.undoList, action.payload],
+      };
+    }
+
+    case DRAW: {
+      if (state.canvasRef) {
+        const canvas: CanvasRenderingContext2D | null = state.canvasRef.getContext('2d');
+
+        const width = state.canvasRef?.width;
+        const height = state.canvasRef?.height;
+        const img = new Image();
+        const dataUrl = '';
+        img.src = dataUrl;
+
+        img.onload = () => {
+          if (canvas?.clearRect && canvas?.drawImage) {
+            canvas.clearRect(0, 0, width, height);
+            canvas.drawImage(img, 0, 0, width, height);
+          }
+        };
+      }
+
+      return {
+        ...state,
       };
     }
 

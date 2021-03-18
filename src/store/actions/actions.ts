@@ -1,4 +1,4 @@
-import { ToolType, ColorType } from '../../const/index';
+import { ToolType, ColorType, IAddPaint } from '../../const/index';
 
 import {
   SET_REF,
@@ -10,7 +10,29 @@ import {
   PUSH_TO_REDO,
   REDO,
   UNDO,
+  DELETE_STATE,
+  DRAW,
+  ADD_PAINT,
 } from './actionTypes';
+
+function addPaint(obj: IAddPaint) {
+  return {
+    type: ADD_PAINT,
+    payload: obj,
+  };
+}
+
+function draw() {
+  return {
+    type: DRAW,
+  };
+}
+
+function deleteState() {
+  return {
+    type: DELETE_STATE,
+  };
+}
 
 function redo() {
   return {
@@ -83,4 +105,7 @@ export {
   pushToUndo,
   redo,
   undo,
+  deleteState,
+  draw,
+  addPaint,
 };
