@@ -3,11 +3,13 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 import { useActions } from '../../hooks/useActions';
 import { auth } from '../../initfirebase';
 import { HOME_ROUTE } from '../../ulits';
+
+import style from './NavBar.scss';
 
 const NavBar = (): JSX.Element => {
   const [user] = useAuthState(auth);
@@ -23,9 +25,17 @@ const NavBar = (): JSX.Element => {
       <Toolbar variant="dense">
         <Grid container justify="flex-end">
           {user ? (
-            <Button onClick={signOut} variant="outlined">
-              Выйти
-            </Button>
+            <div className={style.buttonGroup}>
+              <Link to="/">
+                <Button variant="outlined">Home</Button>
+              </Link>
+              <Link to="/myDrawings">
+                <Button variant="outlined">My drawings</Button>
+              </Link>
+              <Button onClick={signOut} variant="outlined">
+                Выйти
+              </Button>
+            </div>
           ) : (
             <NavLink to={HOME_ROUTE}>
               <Button variant="outlined">Логин</Button>

@@ -11,6 +11,10 @@ import {
   UNDO,
   DRAW,
   ADD_PAINT,
+  SET_PAINT,
+  SAVE_PAINT,
+  CLEAR_UNDO_REDO,
+  GET_DOCUMENT_DATA_BY_UID,
 } from '../store/actions/actionTypes';
 import Brush from '../tools/Brush';
 import Circle from '../tools/Circle';
@@ -34,11 +38,7 @@ interface IAppState {
 interface IPaint {
   name: string;
   id: string;
-  canvas: IPrivateCanvas;
-}
-
-interface IPrivateCanvas {
-  canvasRef: HTMLCanvasElement | null;
+  isShare: boolean;
   dataUrl: string;
 }
 
@@ -58,10 +58,41 @@ interface IAddPaint {
   id: string;
 }
 
-type PrivatePaintsType = {
-  type: typeof ADD_PAINT;
-  payload: IAddPaint;
-};
+interface ISetPaint {
+  name: string;
+  id: string;
+  dataUrl: string;
+  isShare: boolean;
+}
+
+interface IFirestorePaint {
+  paintUrl: string;
+  paintName: string;
+  isShare: boolean;
+}
+
+interface ISavePaint {
+  dataUrl: string;
+  paintId: string;
+}
+
+type PrivatePaintsType =
+  | {
+    type: typeof ADD_PAINT;
+    payload: IAddPaint;
+  }
+  | {
+    type: typeof SET_PAINT;
+    payload: IPaint[];
+  }
+  | {
+    type: typeof SAVE_PAINT;
+    payload: ISavePaint;
+  }
+  | {
+    type: typeof GET_DOCUMENT_DATA_BY_UID;
+    payload: string;
+  };
 
 type CanvasActionType =
   | {
@@ -84,6 +115,10 @@ type CanvasActionType =
   }
   | {
     type: typeof DRAW;
+    payload: string;
+  }
+  | {
+    type: typeof CLEAR_UNDO_REDO;
   };
 
 type ToolActionType =
@@ -115,4 +150,8 @@ export {
   IAppState,
   PrivatePaintsType,
   IAddPaint,
+  ISetPaint,
+  IFirestorePaint,
+  IPaint,
+  ISavePaint,
 };

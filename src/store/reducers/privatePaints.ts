@@ -1,5 +1,6 @@
 import { PrivatePaintsType, IAppState } from '../../const';
-import { ADD_PAINT } from '../actions/actionTypes';
+import { overrideItemAtIndex } from '../../ulits/arrayUtils';
+import { ADD_PAINT, SET_PAINT, SAVE_PAINT, GET_DOCUMENT_DATA_BY_UID } from '../actions/actionTypes';
 
 const initialState = {
   privatePaints: [],
@@ -17,9 +18,42 @@ const privateState = (state: IAppState = initialState, action: PrivatePaintsType
           {
             name,
             id,
-            canvas: null,
+            isShare: false,
+            dataUrl: '',
           },
         ],
+      };
+    }
+
+    case GET_DOCUMENT_DATA_BY_UID: {
+      return {
+        ...state,
+      };
+    }
+
+    case SAVE_PAINT: {
+      const { dataUrl, paintId } = action.payload;
+
+      const targetPaintIndex = state.privatePaints.findIndex(x => x.id === paintId);
+      const targetPaint = state.privatePaints[targetPaintIndex];
+
+      return {
+        ...state,
+        privatePaints: overrideItemAtIndex(
+          state.privatePaints,
+          {
+            ...targetPaint,
+            dataUrl,
+          },
+          targetPaintIndex,
+        ),
+      };
+    }
+
+    case SET_PAINT: {
+      return {
+        ...state,
+        privatePaints: action.payload,
       };
     }
     default:

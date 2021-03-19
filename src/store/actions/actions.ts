@@ -1,4 +1,14 @@
-import { ToolType, ColorType, IAddPaint } from '../../const/index';
+import firebase from 'firebase';
+import { Dispatch } from 'react';
+
+import {
+  ToolType,
+  ColorType,
+  IAddPaint,
+  IPaint,
+  ISavePaint,
+  IFirestorePaint,
+} from '../../const/index';
 
 import {
   SET_REF,
@@ -13,7 +23,28 @@ import {
   DELETE_STATE,
   DRAW,
   ADD_PAINT,
+  SET_PAINT,
+  SAVE_PAINT,
+  CLEAR_UNDO_REDO,
 } from './actionTypes';
+
+function clearUndoRedoLists() {
+  return { type: CLEAR_UNDO_REDO };
+}
+
+function savePaint(obj: ISavePaint) {
+  return {
+    type: SAVE_PAINT,
+    payload: obj,
+  };
+}
+
+function setPaint(obj: IPaint[]) {
+  return {
+    type: SET_PAINT,
+    payload: obj,
+  };
+}
 
 function addPaint(obj: IAddPaint) {
   return {
@@ -22,9 +53,10 @@ function addPaint(obj: IAddPaint) {
   };
 }
 
-function draw() {
+function draw(str: string) {
   return {
     type: DRAW,
+    payload: str,
   };
 }
 
@@ -95,6 +127,52 @@ function setLineWidth(width: number) {
   };
 }
 
+const authWithGoogle = (auth: firebase.auth.Auth) => async () => {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  await auth.signInWithPopup(provider);
+};
+
+const getDocumentDataByUid = (uid: string) => async (dispatch: Dispatch<any>) => {
+  let paintArray: IPaint[] = [];
+  const data = firebase.firestore().collection('users').doc(uid).collection('paints');
+  const snapshot = await data.get();
+  snapshot.forEach(doc => {
+    const { paintName, paintUrl, isShare } = doc.data() as IFirestorePaint;
+    paintArray = [
+      ...paintArray,
+      {
+        dataUrl: paintUrl,
+        id: doc.id,
+        isShare,
+        name: paintName,
+      },
+    ];
+  });
+  dispatch(setPaint(paintArray));
+};
+
+const createPaint = (uid: string, name: string) => async (dispatch: Dispatch<any>) => {
+  const taskRef = firebase.firestore().collection('users').doc(uid).collection('paints').doc();
+  const paintId = taskRef.id;
+  await taskRef.set({ paintName: name, paintUrl: '', isShare: false });
+  dispatch(addPaint({ name, id: paintId }));
+};
+
+const updatePaint = (uid: string, paintId: string, paintUrl: string) => async (
+  dispatch: Dispatch<any>,
+) => {
+  const taskRef = firebase
+    .firestore()
+    .collection('users')
+    .doc(uid)
+    .collection('paints')
+    .doc(paintId);
+  await taskRef.update({
+    paintUrl,
+  });
+  dispatch(savePaint({ dataUrl: paintUrl, paintId }));
+};
+
 export {
   setTool,
   setRef,
@@ -108,4 +186,11 @@ export {
   deleteState,
   draw,
   addPaint,
+  setPaint,
+  savePaint,
+  clearUndoRedoLists,
+  getDocumentDataByUid,
+  createPaint,
+  updatePaint,
+  authWithGoogle,
 };

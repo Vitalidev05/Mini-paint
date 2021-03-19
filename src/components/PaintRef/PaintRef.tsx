@@ -1,4 +1,4 @@
-import { Card } from '@material-ui/core';
+import { Card, CardActionArea } from '@material-ui/core';
 import React from 'react';
 
 import style from './PaintRef.scss';
@@ -12,8 +12,12 @@ const PaintRef = (props: IProps): JSX.Element => {
   const { id, name } = props;
   return (
     <Card className={style.Card}>
-      <p>{name}</p>
-      <p>{id}</p>
+      <CardActionArea onClick={() => {}}>
+        <p>name:</p>
+        <p>{name}</p>
+        <p>id:</p>
+        <p>{id}</p>
+      </CardActionArea>
     </Card>
   );
 };

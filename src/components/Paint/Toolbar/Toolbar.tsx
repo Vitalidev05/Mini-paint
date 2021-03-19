@@ -10,9 +10,11 @@ import {
   Save,
 } from '@material-ui/icons';
 import React, { useEffect } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 import { useActions } from '../../../hooks/useActions';
 import { useStates } from '../../../hooks/useStates';
+import { auth } from '../../../initfirebase';
 import BrushClass from '../../../tools/Brush';
 import CircleClass from '../../../tools/Circle';
 import EraserClass from '../../../tools/Eraser';
@@ -22,9 +24,26 @@ import RectClass from '../../../tools/Rect';
 import InputWidth from './InputWidth';
 import style from './Toolbar.scss';
 
-export const Toolbar = () => {
-  const { setTool, setFillColor, setStrokeColor, undo, redo, draw } = useActions();
+interface IProps {
+  id: string;
+}
+
+export const Toolbar = (props: IProps) => {
+  const [user] = useAuthState(auth);
+  const { id } = props;
+
+  const {
+    setTool,
+    setFillColor,
+    setStrokeColor,
+    undo,
+    redo,
+    draw,
+    clearUndoRedoLists,
+    updatePaint,
+  } = useActions();
   const { canvasRef } = useStates(store => store.canvasState);
+  const { privatePaints } = useStates(store => store.privatePaints);
 
   function setBrush() {
     if (canvasRef) {
@@ -34,6 +53,16 @@ export const Toolbar = () => {
 
   useEffect(() => {
     if (canvasRef) {
+      const targetPrivatePaintId = privatePaints.findIndex(x => x.id === id);
+      const targetPrivatePaint = privatePaints[targetPrivatePaintId];
+      const { dataUrl } = targetPrivatePaint;
+      draw(dataUrl);
+    }
+  }, [canvasRef]);
+
+  useEffect(() => {
+    if (canvasRef) {
+      clearUndoRedoLists();
       setBrush();
     }
   }, [canvasRef]);
@@ -60,6 +89,12 @@ export const Toolbar = () => {
   function setLine() {
     if (canvasRef) {
       setTool(new LineClass(canvasRef));
+    }
+  }
+
+  function saveState() {
+    if (user && canvasRef) {
+      updatePaint(user.uid, id, canvasRef.toDataURL());
     }
   }
 
@@ -94,7 +129,7 @@ export const Toolbar = () => {
           <Button variant="contained" onClick={redo}>
             <Redo />
           </Button>
-          <Button variant="contained" onClick={draw}>
+          <Button variant="contained" onClick={saveState}>
             <Save />
           </Button>
         </ButtonGroup>

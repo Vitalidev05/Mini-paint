@@ -1,5 +1,13 @@
 import { CanvasActionType, ICanvasState } from '../../const';
-import { SET_REF, PUSH_TO_REDO, PUSH_TO_UNDO, REDO, UNDO, DRAW } from '../actions/actionTypes';
+import {
+  SET_REF,
+  PUSH_TO_REDO,
+  PUSH_TO_UNDO,
+  REDO,
+  UNDO,
+  DRAW,
+  CLEAR_UNDO_REDO,
+} from '../actions/actionTypes';
 
 const initialState = {
   canvasRef: null,
@@ -14,6 +22,14 @@ const canvasState = (state: ICanvasState = initialState, action: CanvasActionTyp
       return {
         ...state,
         canvasRef: action.payload,
+      };
+    }
+
+    case CLEAR_UNDO_REDO: {
+      return {
+        ...state,
+        redoList: [],
+        undoList: [],
       };
     }
 
@@ -32,13 +48,16 @@ const canvasState = (state: ICanvasState = initialState, action: CanvasActionTyp
     }
 
     case DRAW: {
+      const dataUrl = action.payload;
+
       if (state.canvasRef) {
         const canvas: CanvasRenderingContext2D | null = state.canvasRef.getContext('2d');
 
         const width = state.canvasRef?.width;
         const height = state.canvasRef?.height;
         const img = new Image();
-        const dataUrl = '';
+        // console.log(dataUrl);
+
         img.src = dataUrl;
 
         img.onload = () => {
@@ -55,7 +74,7 @@ const canvasState = (state: ICanvasState = initialState, action: CanvasActionTyp
     }
 
     case REDO: {
-      if (state.canvasRef) {
+      if (state.canvasRef && state.redoList.length > 0) {
         const canvas: CanvasRenderingContext2D | null = state.canvasRef.getContext('2d');
 
         const width = state.canvasRef?.width;
@@ -76,8 +95,6 @@ const canvasState = (state: ICanvasState = initialState, action: CanvasActionTyp
               canvas.drawImage(img, 0, 0, width, height);
             }
           };
-        } else {
-          canvas?.clearRect(0, 0, width, height);
         }
       }
       return {
@@ -86,7 +103,7 @@ const canvasState = (state: ICanvasState = initialState, action: CanvasActionTyp
     }
 
     case UNDO: {
-      if (state.canvasRef) {
+      if (state.canvasRef && state.undoList.length > 0) {
         const canvas: CanvasRenderingContext2D | null = state.canvasRef.getContext('2d');
 
         const width = state.canvasRef?.width;
@@ -107,8 +124,6 @@ const canvasState = (state: ICanvasState = initialState, action: CanvasActionTyp
               canvas.drawImage(img, 0, 0, width, height);
             }
           };
-        } else {
-          canvas?.clearRect(0, 0, width, height);
         }
       }
       return {

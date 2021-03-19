@@ -1,13 +1,23 @@
 import { Card, CardContent, TextField, CardActions, Button } from '@material-ui/core';
 import React, { useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
-// import { useActions } from '../../hooks/useActions';
+import { useActions } from '../../hooks/useActions';
+import { auth } from '../../initfirebase';
 
 import style from './AddNewPaint.scss';
 
 const AddNewPaint = (): JSX.Element => {
-  // const { addPaint } = useActions();
+  const { createPaint } = useActions();
   const [name, setName] = useState('');
+  const [user] = useAuthState(auth);
+
+  const sendPaint = () => {
+    if (user) {
+      createPaint(user.uid, name);
+    }
+  };
+
   return (
     <Card className={style.Card}>
       <CardContent>
@@ -19,7 +29,9 @@ const AddNewPaint = (): JSX.Element => {
         />
       </CardContent>
       <CardActions>
-        <Button variant="contained">Add Paint</Button>
+        <Button variant="contained" onClick={sendPaint}>
+          Add Paint
+        </Button>
       </CardActions>
     </Card>
   );

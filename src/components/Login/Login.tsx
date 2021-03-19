@@ -1,17 +1,16 @@
 import { Button, Container, Grid, Box } from '@material-ui/core';
-import firebase from 'firebase';
 import React from 'react';
 
+import { useActions } from '../../hooks/useActions';
 import 'regenerator-runtime';
-
 // import { useStates } from '../../hooks/useStates';
-
 import { auth } from '../../initfirebase';
 
 const Login = (): JSX.Element => {
-  const login = async () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    await auth.signInWithPopup(provider);
+  const { authWithGoogle } = useActions();
+
+  const login = () => {
+    authWithGoogle(auth);
   };
 
   return (
