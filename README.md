@@ -2,7 +2,7 @@
 [TASK](https://docs.google.com/document/d/1K79_NA4lMYfqQiIJGqLDek1K9z-oc2qg8n4AvrN1PXE/edit)
 
 # Demo
-[Clever-todo-list](https://determined-yonath-c75cd8.netlify.app/)
+[mini-paint](https://determined-yonath-c75cd8.netlify.app/)
 
 # How to run the app
 1. Clone this repo:
