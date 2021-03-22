@@ -63,10 +63,10 @@ const PublicDrawings = (): JSX.Element => {
           .filter(x => (DrawingAuthor === '' ? x.author : x.author === DrawingAuthor))
           .map(x => (
             <div key={x.author} className={style.authorContainer}>
-              <h3 className={style.suptitle}>
-                Draws by
-                {x.author}
-              </h3>
+              <div className={style.authorTitle}>
+                <span className={style.suptitle}>Drawings by</span>
+                <span className={style.author}>{x.author}</span>
+              </div>
               <Divider />
               <div className={style.cardContainer}>
                 {x.drawings.map(data => (
