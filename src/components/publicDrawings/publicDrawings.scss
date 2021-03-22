@@ -1,16 +1,16 @@
 $card-height: 160px;
-$card-width: 250px;
+$card-width: 350px;
 
 .cardContainer {
   display: flex;
   gap: 20px;
-  margin: 20px 0;
+  margin: 20px auto;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .card {
-  width: $card-width;
+  max-width: $card-width;
 }
 
 .cardImg {
@@ -26,6 +26,17 @@ $card-width: 250px;
 .card {
   display: flex;
   flex-direction: column;
+}
+
+.suptitle {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 32px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
 }
 
 .container {

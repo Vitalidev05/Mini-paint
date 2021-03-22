@@ -15,6 +15,7 @@ const AddNewPaint = (): JSX.Element => {
   const sendPaint = () => {
     if (user) {
       createPaint(user.uid, name);
+      setName('');
     }
   };
 
@@ -29,7 +30,7 @@ const AddNewPaint = (): JSX.Element => {
         />
       </CardContent>
       <CardActions>
-        <Button variant="contained" onClick={sendPaint}>
+        <Button variant="contained" onClick={sendPaint} disabled={!name}>
           Add Paint
         </Button>
       </CardActions>

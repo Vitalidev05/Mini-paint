@@ -14,7 +14,8 @@ import {
   SET_PAINT,
   SAVE_PAINT,
   CLEAR_UNDO_REDO,
-  GET_DOCUMENT_DATA_BY_UID,
+  UPDATE_SHARE,
+  SET_PUBLIC_DRAWINGS,
 } from '../store/actions/actionTypes';
 import Brush from '../tools/Brush';
 import Circle from '../tools/Circle';
@@ -32,7 +33,22 @@ interface IToolState {
 
 interface IAppState {
   privatePaints: IPaint[];
+}
+
+interface IPublicDraw {
+  paintName: string;
+  paintId: string;
+  paintUrl: string;
+}
+
+interface IPublicDrawsByAuthor {
   author: string;
+  drawings: IPublicDraw[];
+  drawingsCount: number;
+}
+
+interface IPublicDrawings {
+  publicDraws: IPublicDrawsByAuthor[];
 }
 
 interface IPaint {
@@ -76,6 +92,15 @@ interface ISavePaint {
   paintId: string;
 }
 
+interface IUpdateShare {
+  isShare: boolean;
+  paintId: string;
+}
+type PublicPaintsType = {
+  type: typeof SET_PUBLIC_DRAWINGS;
+  payload: IPublicDrawsByAuthor[];
+};
+
 type PrivatePaintsType =
   | {
     type: typeof ADD_PAINT;
@@ -90,8 +115,8 @@ type PrivatePaintsType =
     payload: ISavePaint;
   }
   | {
-    type: typeof GET_DOCUMENT_DATA_BY_UID;
-    payload: string;
+    type: typeof UPDATE_SHARE;
+    payload: IUpdateShare;
   };
 
 type CanvasActionType =
@@ -154,4 +179,9 @@ export {
   IFirestorePaint,
   IPaint,
   ISavePaint,
+  IUpdateShare,
+  IPublicDrawings,
+  IPublicDraw,
+  IPublicDrawsByAuthor,
+  PublicPaintsType,
 };

@@ -3,11 +3,11 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { useActions } from '../../hooks/useActions';
 import { auth } from '../../initfirebase';
-import { HOME_ROUTE } from '../../ulits';
+import { HOME_ROUTE, MY_DRAWINGS_ROUTE, PUBLIC_DRAWINGS_ROUTE } from '../../ulits';
 
 import style from './NavBar.scss';
 
@@ -26,20 +26,28 @@ const NavBar = (): JSX.Element => {
         <Grid container justify="flex-end">
           {user ? (
             <div className={style.buttonGroup}>
-              <Link to="/">
+              <NavLink to={PUBLIC_DRAWINGS_ROUTE}>
+                <Button variant="outlined">Public Routes</Button>
+              </NavLink>
+              <NavLink to={HOME_ROUTE}>
                 <Button variant="outlined">Home</Button>
-              </Link>
-              <Link to="/myDrawings">
+              </NavLink>
+              <NavLink to={MY_DRAWINGS_ROUTE}>
                 <Button variant="outlined">My drawings</Button>
-              </Link>
+              </NavLink>
               <Button onClick={signOut} variant="outlined">
                 Выйти
               </Button>
             </div>
           ) : (
-            <NavLink to={HOME_ROUTE}>
-              <Button variant="outlined">Логин</Button>
-            </NavLink>
+            <div className={style.buttonGroup}>
+              <NavLink to={PUBLIC_DRAWINGS_ROUTE}>
+                <Button variant="outlined">Public Routes</Button>
+              </NavLink>
+              <NavLink to={HOME_ROUTE}>
+                <Button variant="outlined">Логин</Button>
+              </NavLink>
+            </div>
           )}
         </Grid>
       </Toolbar>
