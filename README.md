@@ -86,7 +86,7 @@
              
 	├──const						            # const data for project
 	    └──index.ts
-    ├──hooks						          # custom hooks to connect redux
+        ├──hooks						          # custom hooks to connect redux
 	    ├──useAction.ts
 	    └──useTypedSelector.ts
 	├──store						            # redux store
@@ -101,7 +101,7 @@
         ├──rootReducer.ts         # combine reducers together 
         └──toolState.ts           # reducer for tool for canvas
 	    └──index.ts
-    ├──utils						          # utils for project
+        ├──utils						          # utils for project
 	    ├──arrayUtils.ts
 	    └──index.ts
 	├──index.tsx					
@@ -112,20 +112,20 @@
 # FIRESTORE STRUCTURE
 
 ```
-    └──users                        #main collection for users
+          └──users                        #main collection for users
 	     └──userId                    #user id document
 	        └──paints                 #collection of drawings
 	           └──paintId             #paint id document				          
 	              ├──isShare      	  #isShare (boolean)
-                ├──paintName        #paint name (string)
-                └──paintUrl         #paint url (string)
+                      ├──paintName        #paint name (string)
+                      └──paintUrl         #paint url (string)
                 
-    └──publicDrawings               #publicDrawings collection for public drawings
+         └──publicDrawings               #publicDrawings collection for public drawings
 	     └──authorName                #author name document
 	        └──drawings               #collection of public drawings
 	           └──drawingId           #drawing id document				          
 	              ├──paintName        #paint name (string)
-                └──paintUrl         #paint url (string)
+                      └──paintUrl         #paint url (string)
                
 
 ```
