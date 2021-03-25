@@ -73,12 +73,16 @@ const PublicDrawings = (): JSX.Element => {
                   <Card key={data.paintId} className={style.card} variant="outlined">
                     <CardHeader subheader={data.paintName} />
                     <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        alt={data.paintName}
-                        image={data.paintUrl}
-                        className={style.cardImg}
-                      />
+                      {data.paintUrl ? (
+                        <CardMedia
+                          component="img"
+                          alt={data.paintName}
+                          image={data.paintUrl}
+                          className={style.cardImg}
+                        />
+                      ) : (
+                        <CardMedia component="div" className={style.imagePlaceholder} />
+                      )}
                     </CardActionArea>
                   </Card>
                 ))}
