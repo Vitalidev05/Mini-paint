@@ -1,0 +1,60 @@
+$card-height: 160px;
+$card-width: 350px;
+
+.cardContainer {
+  display: flex;
+  gap: 20px;
+  margin: 20px auto;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  max-width: $card-width;
+}
+
+.cardImg {
+  background-size: cover;
+}
+
+.cardText {
+  word-break: keep-all;
+  max-width: 200px;
+  overflow: hidden;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.authorTitle {
+  text-align: center;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.suptitle {
+  font-style: italic;
+  font-size: 26px;
+}
+
+.author {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  padding: 0 20px;
+  flex-direction: column;
+}

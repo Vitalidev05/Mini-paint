@@ -20,14 +20,7 @@
       "jsx": true
     }
   },
-  "plugins": [
-    "@typescript-eslint",
-    "react-hooks",
-    "jsx-a11y",
-    "import",
-    "react",
-    "prettier"
-  ],
+  "plugins": ["@typescript-eslint", "react-hooks", "jsx-a11y", "import", "react", "prettier"],
   "settings": {
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
@@ -59,10 +52,7 @@
         "avoidEscape": true
       }
     ],
-    "@typescript-eslint/semi": [
-      "error",
-      "always"
-    ],
+    "@typescript-eslint/semi": ["error", "always"],
     "@typescript-eslint/member-delimiter-style": [
       "error",
       {
@@ -77,15 +67,9 @@
       }
     ],
     "@typescript-eslint/dot-notation": "off",
-    "arrow-parens": [
-      "error",
-      "as-needed"
-    ],
+    "arrow-parens": ["error", "as-needed"],
     "camelcase": "error",
-    "comma-dangle": [
-      "error",
-      "always-multiline"
-    ],
+    "comma-dangle": ["error", "always-multiline"],
     "eol-last": "error",
     "semi": "error",
     "id-blacklist": [
@@ -100,24 +84,27 @@
       "Undefined"
     ],
     "id-match": "error",
-    "import/order": ["error", {
-      "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
-      "pathGroups": [
-        {
-          "pattern": "@/**/*.pcss",
-          "group": "index"
-        },
-        {
-          "pattern": "@/**",
-          "group": "internal"
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "pathGroups": [
+          {
+            "pattern": "@/**/*.pcss",
+            "group": "index"
+          },
+          {
+            "pattern": "@/**",
+            "group": "internal"
+          }
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": false
         }
-      ],
-      "newlines-between": "always",
-      "alphabetize": {
-        "order": "asc",
-        "caseInsensitive": false
       }
-    }],
+    ],
     "max-len": [
       "error",
       {
@@ -131,11 +118,8 @@
         "ignoreUrls": true
       }
     ],
-    "quotes": [
-      "error",
-      "single"
-    ],
-    "dot-notation":"off",
+    "quotes": ["error", "single"],
+    "dot-notation": "off",
     "no-console": "error",
     "no-alert": "error",
     "no-var": "error",
@@ -153,11 +137,13 @@
     "react/prop-types": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "react/jsx-filename-extension": [1, {
-      "extensions": [".ts", ".tsx"]
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".ts", ".tsx"]
       }
     ],
-    "react/jsx-fragments" : ["error", "element"],
+    "react/jsx-fragments": ["error", "element"],
     "react/jsx-props-no-spreading": "off",
     "react/require-default-props": "off",
     "space-before-function-paren": [
@@ -171,11 +157,12 @@
       "error",
       "always",
       {
-        "markers": [
-          "/"
-        ]
+        "markers": ["/"]
       }
     ],
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "no-param-reassign": "off",
+    "@typescript-eslint/no-unsafe-assignment": "warn",
+    "react/static-property-placement": "warn"
   }
 }
