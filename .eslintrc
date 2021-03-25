@@ -163,6 +163,7 @@
     "import/prefer-default-export": "off",
     "no-param-reassign": "off",
     "@typescript-eslint/no-unsafe-assignment": "warn",
-    "react/static-property-placement": "warn"
+    "react/static-property-placement": "warn",
+    "react/no-children-prop": "warn"
   }
 }
