@@ -1,5 +1,5 @@
-$card-height: 160px;
 $card-width: 250px;
+$card-height: $card-width * 0.64;
 
 .cardContainer {
   display: flex;
@@ -34,4 +34,9 @@ $card-width: 250px;
   display: flex;
   padding: 0 20px;
   flex-direction: column;
+}
+
+.imagePlaceholder {
+  width: $card-width;
+  height: $card-height;
 }

@@ -45,7 +45,7 @@ const Paints = (): JSX.Element => {
                     className={style.cardImg}
                   />
                 ) : (
-                  x.name
+                  <CardMedia component="div" className={style.imagePlaceholder} />
                 )}
               </Link>
             </CardActionArea>
