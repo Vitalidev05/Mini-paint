@@ -12,9 +12,10 @@
 2. Open the directory in code editor
 3. Run npm install
   ```$ npm install```
-4. Using git checkout enter in branch(last branch feature is feature/publicDrawings)
-	 ```$ git checkout feature/publicDrawings"``` 
-5.  Run the application with the command
+4. Using git checkout enter in branch develop
+	 ```$ git checkout develop``` 
+5. Create a .env file and fill like in .env.example file in root
+6.  Run the application with the command
       ```$ npm run dev```
 
 # npm scripts
